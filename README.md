@@ -5,6 +5,7 @@ In detail, given the set of vectors a, the algorithm outputs the set of vectors 
 <img src="https://latex.codecogs.com/gif.latex?\bigcap_{i}&space;\bf{a}_i^{T}&space;\bf{x}&space;\geq&space;0&space;\leftrightarrow&space;\sum&space;c_i&space;\bf{b}_i&space;=&space;\bf{x}&space;(\forall&space;i,&space;c_i&space;\geq&space;0)" />
 
 This software is used to classify the contact states in Assembly Plan from Observation:
+
 [1] Jun Takamatsu, Koichi Ogawara, Hiroshi Kimura, and Katsushi ikeuchi, “Recognizing Assembly Tasks Through Human Demonstration,” Int. J. of Robotics Research , Vol. 26, No. 7, pp. 641 – 659, Jul. 2007.
 
 ## Requirement
