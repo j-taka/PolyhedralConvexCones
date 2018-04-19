@@ -23,5 +23,5 @@ This software is used to classify the contact states in Assembly Plan from Obser
 Jun Takamatsu <j-taka@is.naist.jp>
 
 ## License
-[MIT](http://b4b4r07.mit-license.org)
+[MIT](https://opensource.org/licenses/MIT)
 
