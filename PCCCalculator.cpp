@@ -337,7 +337,7 @@ void PCCCalculator::Calc1DConvexHull(Eigen::MatrixXd &dest, const Eigen::MatrixX
 	if (max_v - min_v > _EPS) {
 		dest = Eigen::MatrixXd(2, 1);
 		dest(0, 0) = max_v;
-		dest(0, 1) = min_v;
+		dest(1, 0) = min_v;
 	}
 	else {
 		dest = Eigen::MatrixXd(1, 1);
