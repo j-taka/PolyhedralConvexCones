@@ -2,16 +2,18 @@
 
 #include "PCCCalculator.h"
 #include "Combination.h"
+#include <iostream>
 
 // #define _PCCDEBUG
 
+#define qh_QHimport
 #ifdef WIN32
 #define NRANSI
 #ifdef __cplusplus
 extern "C" {
 #endif   
 #endif
-#include <libqhull/qhull_a.h>
+#include "libqhull_r/qhull_ra.h"
 qhT qh_qh;
 #ifdef WIN32
 #ifdef __cplusplus
@@ -348,9 +350,10 @@ void PCCCalculator::Calc1DConvexHull(Eigen::MatrixXd &dest, const Eigen::MatrixX
 void PCCCalculator::CalcNDConvexHull(Eigen::MatrixXd &dest, const Eigen::MatrixXd &src) const
 {
 	QHULL_LIB_CHECK
-
+	
 	coordT *points, *point;
 	boolT ismalloc = False;
+	qhT *qh = &qh_qh;
 	char flags[250];
 #ifdef _PCCDEBUG
 	FILE *outfile = stdout, *errfile = stderr;
@@ -369,19 +372,20 @@ void PCCCalculator::CalcNDConvexHull(Eigen::MatrixXd &dest, const Eigen::MatrixX
 			*point = src(i, j);
 		}
 	}
-	exitcode = qh_new_qhull(dim, num, points, ismalloc, flags, outfile, errfile);
+	std::cerr << "hoge" << std::endl;
+	exitcode = qh_new_qhull(qh, dim, num, points, ismalloc, flags, outfile, errfile);
 	if (!exitcode) {                  /* if no error */
 		int count(0);
-		dest = Eigen::MatrixXd(qh num_vertices, dim);
+		dest = Eigen::MatrixXd(qh->num_vertices, dim);
 		FORALLvertices{
-			for (int i(0); i < qh hull_dim; ++i) {
+			for (int i(0); i < qh->hull_dim; ++i) {
 				dest(count, i) = vertex->point[i];
 			}
 			count++;
 		}
 	}
-	qh_freeqhull(!qh_ALL);                   /* free long memory  */
-	qh_memfreeshort(&curlong, &totlong);    /* free short memory and memory allocator */
+	qh_freeqhull(qh, !qh_ALL);                   /* free long memory  */
+	qh_memfreeshort(qh, &curlong, &totlong);    /* free short memory and memory allocator */
 	if (curlong || totlong)
 		fprintf(errfile, "qhull internal warning (user_eg, #1): did not free %d bytes of long memory (%d pieces)\n", totlong, curlong);
 	delete[]points;

@@ -9,7 +9,8 @@ FIND_PACKAGE(Eigen3 REQUIRED)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
 #qhull
-set(QHULL_PATH $ENV{QHULL_ROOT})
+#set(QHULL_PATH $ENV{QHULL_ROOT}) #win32
+set(QHULL_PATH "C:/Program Files/qhull") #win64
 include_directories(${QHULL_PATH}/include)
 link_directories(${QHULL_PATH}/lib)
 
@@ -22,4 +23,4 @@ ADD_EXECUTABLE(
 	Combination.h
 )
 
-TARGET_LINK_LIBRARIES(sample qhullstatic.lib qhullstatic_r.lib)	
+TARGET_LINK_LIBRARIES(sample qhullstatic_r.lib)	
