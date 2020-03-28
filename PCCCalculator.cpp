@@ -306,6 +306,7 @@ void PCCCalculator::CalcConvexHull(Eigen::MatrixXd &dest, const Eigen::VectorXd 
 	if (eig.eigenvalues()[dim - 1] < SVDEPS) {
 		dest = Eigen::MatrixXd(1, ave.size());
 		dest.row(0) = ave.transpose();
+		cvDim = 0;
 		return;
 	}
 	for (int i(1); i < dim; ++i) {
@@ -372,7 +373,6 @@ void PCCCalculator::CalcNDConvexHull(Eigen::MatrixXd &dest, const Eigen::MatrixX
 			*point = src(i, j);
 		}
 	}
-	std::cerr << "hoge" << std::endl;
 	exitcode = qh_new_qhull(qh, dim, num, points, ismalloc, flags, outfile, errfile);
 	if (!exitcode) {                  /* if no error */
 		int count(0);
